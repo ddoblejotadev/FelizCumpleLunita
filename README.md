@@ -10,9 +10,18 @@ El proyecto contiene los siguientes archivos:
   
 - **css/style.css**: Contiene los estilos CSS para la página, incluyendo las animaciones de corazones y otros elementos decorativos.
   
-- **js/app.js**: Código JavaScript que se encarga de las animaciones y la interactividad de la página. Implementa funciones para crear y animar los corazones.
-  
-- **images/heart.png**: Recurso gráfico utilizado para representar los corazones en la página.
+- **js/app.js**: Código JavaScript que se encarga de las animaciones y la interactividad.
+
+- **service-worker.js**: Service Worker para funcionalidad offline.
+
+- **manifest.json**: Archivo de configuración para PWA.
+
+## Características
+
+- Animaciones suaves
+- Diseño responsive
+- Soporte offline
+- Instalable como PWA
 
 ## Instrucciones para Configurar y Ejecutar el Proyecto
 
