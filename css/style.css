@@ -586,12 +586,16 @@ a:hover {
     }
 
     .footer {
-        padding: 15px;
-        margin-top: 30px;
+        width: 100%;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 5px;
+        font-size: 0.9rem;
     }
     
-    .footer-content {
-        font-size: 0.9rem;
+    .footer a {
+        display: inline-block;
+        margin: 0 2px;
     }
 
     .footer {
@@ -645,4 +649,4 @@ a:hover {
     right: 0;
     z-index: 1000;
     display: none;            /* Oculto por defecto */
-  }
+}
