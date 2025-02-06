@@ -1,12 +1,3 @@
-// Añadir al inicio del archivo
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.getRegistrations().then(registrations => {
-      for (const registration of registrations) {
-        registration.unregister();
-      }
-      console.log('Service Worker desregistrado.');
-    });
-  } 
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log("DOMContentLoaded triggered."); // Esto debería aparecer en la consola
