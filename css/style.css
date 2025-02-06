@@ -427,9 +427,6 @@ a:hover {
 .timeline-content img {
     max-width: 100%;
     height: auto;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    object-fit: cover;
 }
 
 .timeline-date {
@@ -649,4 +646,68 @@ a:hover {
     right: 0;
     z-index: 1000;
     display: none;            /* Oculto por defecto */
+}
+
+/* Tablets (768px and up) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .mensaje {
+        padding: 20px;
+        margin: 30px auto;
+    }
+    
+    .timeline-item {
+        padding: 10px;
+    }
+    
+    header h1 {
+        font-size: 3rem;
+    }
+}
+
+/* Móviles (menos de 768px) */
+@media (max-width: 767px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .mensaje {
+        padding: 15px;
+        margin: 20px auto;
+    }
+    
+    .timeline-item {
+        width: 100%;
+        padding: 10px;
+    }
+    
+    .timeline-container::after {
+        left: 20px;
+    }
+    
+    .timeline-item.left,
+    .timeline-item.right {
+        left: 0;
+        width: calc(100% - 40px);
+    }
+    
+    .icon-btn {
+        padding: 12px 24px !important;
+        font-size: 1.2rem !important;
+    }
+}
+
+/* Dispositivos pequeños */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .mensaje p {
+        font-size: 1rem;
+    }
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }
