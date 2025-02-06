@@ -1,8 +1,26 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     console.log("DOMContentLoaded triggered."); // Esto debería aparecer en la consola
     const main = document.querySelector('main');
     
+    // Prevenir rebote en iOS y scroll tembloroso
+    let lastScroll = 0;
+    document.addEventListener('scroll', () => {
+        const currentScroll = window.scrollY;
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        
+        if (currentScroll > maxScroll - 50) {
+            window.scrollTo({
+                top: maxScroll,
+                behavior: 'smooth'
+            });
+        }
+        
+        lastScroll = currentScroll;
+    });
+
+    // Desactivar el comportamiento de rebote en móviles
+    document.body.style.overscrollBehavior = 'none';
+
     // Ajusta la cantidad de elementos animados según el tamaño de pantalla
     const isMobile = window.innerWidth <= 768;
 

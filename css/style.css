@@ -15,6 +15,13 @@ html, body {
     overflow-x: hidden;
     margin: 0;
     padding: 0;
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+html {
+    scroll-behavior: smooth;
+    overscroll-behavior-y: none;
 }
 
 body {
@@ -31,6 +38,11 @@ body {
     flex-direction: column;
     align-items: center;
     transition: background 0.5s ease; /* Transición suave para cambios de fondo */
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 60px; /* Espacio para el footer */
 }
 
 header {
@@ -77,6 +89,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 40px; /* Espacio antes del footer */
 }
 
 .mensaje, .fotos, .poema, .recuerdos {
@@ -471,6 +484,7 @@ a:hover {
 @media (max-width: 768px) {
     body {
         font-size: 0.9rem;
+        padding-bottom: 40px;
     }
     
     header {
@@ -491,6 +505,61 @@ a:hover {
     .timeline-content {
         width: 100%;
         margin: 0;
+    }
+
+    .footer {
+        position: relative;
+        margin-top: 20px;
+    }
+
+    .timeline-content {
+        background: white;
+        padding: 10px;
+        border-radius: 8px;
+        width: auto;
+        margin: 0 10px;
+    }
+
+    .timeline-item {
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .timeline-content img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;  /* Cambiado de 'cover' a 'contain' */
+        border-radius: 4px;
+        max-width: 100%;
+    }
+
+    .timeline-container {
+        width: 100%;
+        padding: 0;
+    }
+
+    .timeline-content {
+        background: white;
+        padding: 10px;
+        border-radius: 8px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .timeline-item {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .timeline-content img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 4px;
+    }
+
+    .timeline-container {
+        padding: 0 10px;
     }
 }
 
@@ -690,6 +759,10 @@ a:hover {
     width: 100%;
     box-sizing: border-box;
     z-index: 1000;
+    margin-top: auto;
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
 }
 
 /* Tablets (768px and up) */
