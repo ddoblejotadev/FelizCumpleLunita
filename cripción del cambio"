@@ -1,0 +1,12 @@
+[33mc7da633[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m Eliminar el Service Worker y el manifiesto; simplificar la carga de la aplicación
+[33mdd6a526[m Actualizar estilo del pie de página y mejorar la visibilidad; desregistrar el Service Worker al cargar
+[33mc1ee52e[m Modificar configuración de la meta viewport para permitir escalado máximo
+[33me38d791[m Corregir ruta del manifiesto en index.html
+[33m0f1530c[m Corregir ruta del manifiesto en index.html
+[33m6bad5d4[m Corregir ruta del manifiesto en index.html
+[33m8d381f1[m Actualizar título del poema y modificar configuración del manifiesto
+[33m3c7ceb2[m Eliminar animación de carga y agregar pie de página fijo con contenido
+[33mc856f8e[m Actualizar título en index.html a mayúsculas
+[33m2dd9c7a[m Resuelto conflicto en README.md
+[33m5fda510[m Initial commit
+[33m4f2ff5d[m Primer commit - Proyecto Feliz Cumpleaños~
