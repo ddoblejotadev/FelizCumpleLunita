@@ -2,24 +2,27 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log("DOMContentLoaded triggered."); // Esto debería aparecer en la consola
     const main = document.querySelector('main');
     
-    // Prevenir rebote en iOS y scroll tembloroso
-    let lastScroll = 0;
+    // Simplificar manejo del scroll
+    document.body.style.overscrollBehavior = 'none';
+    let lastScrollTop = 0;
+    
     document.addEventListener('scroll', () => {
         const currentScroll = window.scrollY;
         const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
         
-        if (currentScroll > maxScroll - 50) {
+        // Prevenir scroll más allá del límite
+        if (currentScroll >= maxScroll) {
             window.scrollTo({
                 top: maxScroll,
-                behavior: 'smooth'
+                behavior: 'auto'
             });
         }
         
-        lastScroll = currentScroll;
-    });
+        lastScrollTop = currentScroll;
+    }, { passive: true });
 
     // Desactivar el comportamiento de rebote en móviles
-    document.body.style.overscrollBehavior = 'none';
+    document.body.style.overscrollBehavior = 'auto';
 
     // Ajusta la cantidad de elementos animados según el tamaño de pantalla
     const isMobile = window.innerWidth <= 768;
@@ -271,20 +274,50 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCounter(); // Llamada inicial
     setInterval(updateCounter, 1000); // Actualiza cada segundo
 
-});
-
-// Mostrar/Ocultar el botón "Volver arriba" según el scroll
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-        gsap.to(".back-to-top", { opacity: 1, duration: 0.5 });
-    } else {
-        gsap.to(".back-to-top", { opacity: 0, duration: 0.5 });
+    // Implementación simplificada del botón back-to-top
+    const backToTopButton = document.getElementById('backToTop');
+    
+    function toggleBackToTop() {
+        const scrolled = window.scrollY;
+        
+        if (scrolled > 300) {
+            requestAnimationFrame(() => {
+                backToTopButton.style.display = 'flex';
+                setTimeout(() => {
+                    backToTopButton.style.opacity = '1';
+                }, 10);
+            });
+        } else {
+            backToTopButton.style.opacity = '0';
+            setTimeout(() => {
+                backToTopButton.style.display = 'none';
+            }, 300);
+        }
     }
-});
 
-// Al hacer clic, desplaza la ventana suavemente hasta el tope
-document.querySelector('.back-to-top').addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.addEventListener('scroll', toggleBackToTop, { passive: true });
+
+    backToTopButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // Corregir el preloader
+    window.addEventListener('load', () => {
+        const preloader = document.getElementById('preloader');
+        if (preloader) {
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 1000);
+            }, 500);
+        }
+    });
+
 });
 
 // Asegúrate de que el listener de scroll esté correctamente declarado
@@ -298,26 +331,6 @@ window.addEventListener('scroll', () => {
 });
 
 
-// Escucha el evento load
-window.addEventListener('load', () => {
-    // Oculta el preloader
-    gsap.to("#preloader", { 
-        duration: 1, 
-        opacity: 0, 
-        ease: "power1.out",
-        onComplete: () => {
-            document.getElementById("preloader").style.display = "none";
-            // Una vez oculto el preloader, inicializa AOS
-            AOS.init({
-                duration: 800,
-                easing: 'ease-in-out',
-                once: false  // Se puede ejecutar cada vez que el elemento entra en el viewport
-            });
-            setTimeout(() => AOS.refresh(), 1000); // Actualiza AOS después de 1 segundo
-        }
-    });
-});
-
 // Añade detección de orientación
 window.addEventListener('orientationchange', () => {
     // Refresca AOS cuando cambia la orientación
@@ -326,9 +339,3 @@ window.addEventListener('orientationchange', () => {
     }, 100);
 });
 
-// Al final del archivo
-
-// Reinicia cualquier transformación y opacidad para header h1
-gsap.set("header h1", { clearProps: "all" });
-// O forzar valores:
-gsap.set("header h1", { transform: "scale(1)", opacity: 1 });

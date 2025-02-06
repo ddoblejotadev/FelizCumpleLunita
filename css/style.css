@@ -11,12 +11,11 @@
 }
 
 html, body {
-    max-width: 100%;
-    overflow-x: hidden;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
     overscroll-behavior: none;
-    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
 }
 
 html {
@@ -90,6 +89,7 @@ main {
     flex-direction: column;
     align-items: center;
     margin-bottom: 40px; /* Espacio antes del footer */
+    z-index: 1;
 }
 
 .mensaje, .fotos, .poema, .recuerdos {
@@ -461,11 +461,6 @@ a:hover {
     max-width: 100%;
 }
 
-.timeline-content img {
-    max-width: 100%;
-    height: auto;
-}
-
 .timeline-date {
     font-size: 0.95rem;
     font-weight: bold;
@@ -478,6 +473,17 @@ a:hover {
         opacity: 1;
         transform: scale(1);
     }
+}
+
+/* Estilos base para las imágenes del timeline */
+.timeline-content img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 4px;
+    max-width: 100%;
+    margin: 0 auto;
+    display: block;
 }
 
 /* Responsividad para pantallas pequeñas */
@@ -502,23 +508,31 @@ a:hover {
         box-sizing: border-box;
     }
     
-    .timeline-content {
-        width: 100%;
-        margin: 0;
-    }
 
     .footer {
-        position: relative;
-        margin-top: 20px;
+        position: static;
+        margin: 20px 0;
+        padding: 10px;
     }
 
-    .timeline-content {
-        background: white;
-        padding: 10px;
-        border-radius: 8px;
-        width: auto;
-        margin: 0 10px;
+
+    .timeline-content img {
+        width: 100%;
+        height: auto;
+        object-fit: contain !important; /* Forzar contain */
+        border-radius: 4px;
+        max-width: 100%;
+        margin: 0 auto;
+        display: block;
+        max-height: none !important; /* Eliminar restricción de altura */
     }
+
+    .timeline-item {
+        width: calc(100% - 40px);
+        margin-left: 40px;
+        padding: 0;
+    }
+
 
     .timeline-item {
         width: 100%;
@@ -566,21 +580,44 @@ a:hover {
 .back-to-top {
     position: fixed;
     bottom: 30px;
-    left: 30px;
+    right: 30px;
     background: var(--accent-color);
     color: #fff;
     border: none;
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    display: flex;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: none;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    z-index: 100;
-    opacity: 0;
-    transition: opacity 0.3s;
+    z-index: 9999;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.back-to-top:hover {
+    background: var(--secondary-color);
+    transform: translateY(-3px);
+}
+
+.back-to-top i {
+    font-size: 20px;
+    line-height: 40px;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+@media (max-width: 768px) {
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+    }
 }
 
 /* Preloader para mostrar mientras carga la página */
@@ -588,13 +625,14 @@ a:hover {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: var(--primary-color);
+    width: 100%;
+    height: 100%;
+    background: #fff;
     display: flex;
-    justify-content: center;
     align-items: center;
-    z-index: 9999;
+    justify-content: center;
+    z-index: 10000;
+    transition: opacity 1s ease;
 }
 
 /* Spinner animado */
@@ -639,100 +677,6 @@ a:hover {
     padding: 20px;
 }
 
-/* Media queries para dispositivos móviles */
-@media screen and (max-width: 768px) {
-    * {
-        animation: none !important;
-        transition: none !important;
-    }
-    
-    header h1 {
-        font-size: 2rem; /* Reduce el tamaño del título principal */
-        padding: 10px;
-    }
-    
-    .mensaje {
-        margin: 20px 10px;
-        padding: 15px;
-    }
-    
-    /* Ajusta el timeline para vista móvil */
-    .timeline-container::after {
-        left: 20px; /* Mueve la línea temporal a la izquierda */
-    }
-    
-    .timeline-item {
-        width: 90%;
-        padding: 0 0 20px 40px;
-        left: 0;
-    }
-    
-    .timeline-item.left,
-    .timeline-item.right {
-        text-align: left;
-        left: 0;
-    }
-    
-    .timeline-item.left::before,
-    .timeline-item.right::before {
-        left: 11px;
-        right: auto;
-    }
-    
-    /* Ajusta el tamaño de los corazones y girasoles */
-    .heart,
-    .sunflower {
-        width: 30px;
-        height: 30px;
-    }
-    
-    /* Ajusta el botón de cumpleaños */
-    .icon-btn {
-        padding: 12px 30px !important;
-        font-size: 1.2rem !important;
-    }
-    
-    /* Ajusta el contador */
-    .counter {
-        margin: 20px 10px;
-        font-size: 0.9rem;
-    }
-
-    .footer {
-        width: 100%;
-        text-align: center;
-        background: rgba(255, 255, 255, 0.8);
-        padding: 5px;
-        font-size: 0.9rem;
-    }
-    
-    .footer a {
-        display: inline-block;
-        margin: 0 2px;
-    }
-
-    .footer {
-        bottom: 10px;
-        right: 10px;
-        padding: 8px 15px;
-    }
-}
-
-/* Ajustes para pantallas muy pequeñas */
-@media screen and (max-width: 480px) {
-    header h1 {
-        font-size: 1.5rem;
-    }
-    
-    .mensaje p {
-        font-size: 1rem;
-    }
-    
-    .timeline-content img {
-        max-height: 200px;
-    }
-}
-
 .close-btn {
     position: absolute;
     top: 20px;
@@ -750,20 +694,35 @@ a:hover {
 }
 
 .footer {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
     background: transparent;
-    color: black;
-    padding: 10px 20px;
-    text-align: right;
-    font-size: 1rem;
-    position: relative; /* Cambiado de fixed a relative */
-    width: 100%;
-    box-sizing: border-box;
+    padding: 10px;
     z-index: 1000;
-    margin-top: auto;
-    text-align: center;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
 }
+
+.footer a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: bold;
+}
+
+.footer a:hover {
+    color: var(--accent-color);
+}
+
+@media screen and (max-width: 768px) {
+    .footer {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+        padding: 10px 0;
+    }
+
 
 /* Tablets (768px and up) */
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -849,4 +808,7 @@ a:hover {
 img {
     max-width: 100%;
     height: auto;
+}
+.author-link {
+    font-weight: bold;
 }
