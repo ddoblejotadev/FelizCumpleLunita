@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Feliz cumpleaños mi amor - Celebración especial">
     <meta name="theme-color" content="#FFC0CB">
     <link rel="manifest" href="/manifest.json">
@@ -17,9 +17,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
 </head>
 <body>
-    <div id="preloader">
-        <div class="spinner"></div>
-    </div>
     <div class="background-test"></div>
     <header class="py-3 bg-light text-center">
         <h1>FELIZ CUMPLEAÑOS MI AMOR</h1>
@@ -108,6 +105,12 @@
             <button class="icon-btn"><i class="fas fa-heart"></i> Feliz Cumpleaños</button>
         </section>
     </main>
+    <footer class="footer" style="position: fixed; bottom: 0; right: 0; background: red; color: white; padding: 10px; z-index: 100000; border: 3px solid yellow;">
+        <div class="footer-content">
+            <p>Hecho con ❤️ por <a href="https://github.com/ddoblejotadev" target="_blank" style="color: yellow;">@ddoblejotadev</a></p>
+            <p class="year">© 2025</p>
+        </div>
+    </footer>
     <button class="back-to-top"><i class="fas fa-arrow-up"></i></button>
     <audio id="bg-music" src="audio/tu-cancion.mp3" preload="auto" loop></audio>
     <!-- Carga GSAP desde CDN -->

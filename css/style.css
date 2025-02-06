@@ -505,11 +505,6 @@ a:hover {
     animation: spin 1s linear infinite;
 }
 
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
 .counter {
     margin: 40px auto;
     padding: 20px;
@@ -589,6 +584,21 @@ a:hover {
         margin: 20px 10px;
         font-size: 0.9rem;
     }
+
+    .footer {
+        padding: 15px;
+        margin-top: 30px;
+    }
+    
+    .footer-content {
+        font-size: 0.9rem;
+    }
+
+    .footer {
+        bottom: 10px;
+        right: 10px;
+        padding: 8px 15px;
+    }
 }
 
 /* Ajustes para pantallas muy pequeñas */
@@ -620,4 +630,41 @@ a:hover {
 
 .close-btn:hover {
     color: #ffc0cb;
+}
+
+.footer {
+    position: fixed !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    background: rgba(255, 0, 0, 0.8) !important;
+    color: #fff !important;
+    padding: 10px 20px !important;
+    border-radius: 10px !important;
+    z-index: 99999 !important;
+    display: block !important;
+}
+
+/* Opcional: quitar cualquier regla que oculte elementos */
+.footer {
+    display: block !important;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.footer p {
+    margin: 2px 0;
+    font-size: 0.9rem;
+}
+
+.footer a {
+    color: #FF1493;
+    font-weight: bold;
+}
+
+.year {
+    font-size: 0.8rem;
 }
