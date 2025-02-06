@@ -1,15 +1,12 @@
 // Añadir al inicio del archivo
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./service-worker.js')
-      .then(registration => {
-        console.log('ServiceWorker registrado correctamente');
-      })
-      .catch(error => {
-        console.log('Error al registrar ServiceWorker:', error);
-      });
-  });
-}
+    navigator.serviceWorker.getRegistrations().then(registrations => {
+      for (const registration of registrations) {
+        registration.unregister();
+      }
+      console.log('Service Worker desregistrado.');
+    });
+  } 
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log("DOMContentLoaded triggered."); // Esto debería aparecer en la consola
@@ -35,13 +32,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function animateHeart(heart) {
-        const fallDuration = Math.random() * 3 + 2; // 2 a 5 segundos
+        const fallDuration = Math.random() * 3 + 2; // Duración entre 2 y 5 segundos
         gsap.to(heart, {
             duration: fallDuration,
             top: '0px',
             ease: "power1.in",
             onComplete: () => {
-                heart.remove();
+                if (heart && heart.parentElement) {
+                    heart.style.opacity = 0;
+                    heart.parentElement.removeChild(heart);
+                } else {
+                    console.log('El elemento heart ya fue removido.');
+                }
             }
         });
     }
@@ -75,7 +77,10 @@ document.addEventListener('DOMContentLoaded', () => {
             rotation: 360,
             ease: "none",
             onComplete: () => {
-                sunflower.remove();
+                if (sunflower) {
+                    sunflower.style.opacity = 0;
+                    sunflower.remove();
+                }
             }
         });
     }
@@ -106,7 +111,10 @@ document.addEventListener('DOMContentLoaded', () => {
             top: (window.innerHeight * 0.3) + 'px',
             ease: "power1.out",
             onComplete: () => {
-                balloon.remove();
+                if (balloon) {
+                    balloon.style.opacity = 0;
+                    balloon.remove();
+                }
             }
         });
     }

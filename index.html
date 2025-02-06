@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=5.0, user-scalable=yes">
     <meta name="description" content="Feliz cumpleaños mi amor - Celebración especial">
     <meta name="theme-color" content="#FFC0CB">
     <link rel="manifest" href="./manifest.json">
@@ -17,9 +17,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
 </head>
 <body>
+    <div id="preloader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; display: flex; align-items: center; justify-content: center; z-index: 10000;">
+        <p>Cargando...</p>
+    </div>
     <div class="background-test"></div>
     <header class="py-3 bg-light text-center">
-        <h1>FELIZ CUMPLEAÑOS MI AMOR</h1>
+        <h1>Feliz Cumpleaños Mi Amor</h1>
     </header>
     <main>
         <section class="mensaje">
@@ -105,14 +108,11 @@
             <button class="icon-btn"><i class="fas fa-heart"></i> Feliz Cumpleaños</button>
         </section>
     </main>
-    <footer class="footer" style="position: fixed; bottom: 0; right: 0; background: red; color: white; padding: 10px; z-index: 100000; border: 3px solid yellow;">
-        <div class="footer-content">
-            <p>Hecho con ❤️ por <a href="https://github.com/ddoblejotadev" target="_blank" style="color: yellow;">@ddoblejotadev</a></p>
-            <p class="year">© 2025</p>
-        </div>
-    </footer>
     <button class="back-to-top"><i class="fas fa-arrow-up"></i></button>
     <audio id="bg-music" src="audio/tu-cancion.mp3" preload="auto" loop></audio>
+    <footer class="footer">
+      <p>Hecho por <a href="https://github.com/ddoblejotadev" target="_blank">@ddoblejotadev</a> ❤️</p>
+    </footer>
     <!-- Carga GSAP desde CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
@@ -130,5 +130,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="js/app.js"></script>
+    <script>
+      window.addEventListener('scroll', () => {
+        const footer = document.querySelector('.footer');
+        // Verifica si el usuario ha llegado al fondo de la página
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+          footer.style.display = 'block';
+        } else {
+          footer.style.display = 'none';
+        }
+      });
+    </script>
 </body>
 </html>
