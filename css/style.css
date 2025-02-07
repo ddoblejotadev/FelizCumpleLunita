@@ -711,6 +711,13 @@ a:hover {
 .footer a:hover {
     color: var(--accent-color);
 }
+.boton-feliz-cumple {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 20px 0;
+}
 
 @media screen and (max-width: 768px) {
     .footer {
@@ -737,6 +744,11 @@ a:hover {
     
     header h1 {
         font-size: 3rem;
+    }
+
+    .boton-feliz-cumple {
+        width: auto !important;
+        margin: 20px auto !important; /* Centrar horizontalmente */
     }
 }
 
@@ -797,13 +809,7 @@ a:hover {
     }
 }
 
-.boton-feliz-cumple {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin: 20px 0;
-}
+
 
 img {
     max-width: 100%;
