@@ -711,45 +711,13 @@ a:hover {
 .footer a:hover {
     color: var(--accent-color);
 }
+/* Estilos globales para .boton-feliz-cumple */
 .boton-feliz-cumple {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     margin: 20px 0;
-}
-
-@media screen and (max-width: 768px) {
-    .footer {
-        position: relative;
-        bottom: auto;
-        left: auto;
-        width: 100%;
-        text-align: center;
-        margin-top: 20px;
-        padding: 10px 0;
-    }
-
-
-/* Tablets (768px and up) */
-@media (min-width: 768px) and (max-width: 1024px) {
-    .mensaje {
-        padding: 20px;
-        margin: 30px auto;
-    }
-    
-    .timeline-item {
-        padding: 10px;
-    }
-    
-    header h1 {
-        font-size: 3rem;
-    }
-
-    .boton-feliz-cumple {
-        width: auto !important;
-        margin: 20px auto !important; /* Centrar horizontalmente */
-    }
 }
 
 /* Móviles (menos de 768px) */
@@ -791,14 +759,35 @@ a:hover {
         font-size: 0.9rem;
         background: rgba(255, 255, 255, 0.1);
     }
-
+    
     .footer a {
         display: inline-block;
         margin: 0 5px;
     }
 }
 
-/* Dispositivos pequeños */
+/* Tablets (768px a 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .mensaje {
+        padding: 20px;
+        margin: 30px auto;
+    }
+    
+    .timeline-item {
+        padding: 10px;
+    }
+    
+    header h1 {
+        font-size: 3rem;
+    }
+    
+    .boton-feliz-cumple {
+        width: auto !important;
+        margin: 20px auto !important; /* Centrar horizontalmente */
+    }
+}
+
+/* Sección para pantallas muy pequeñas (menos de 480px) */
 @media (max-width: 480px) {
     header h1 {
         font-size: 1.5rem;
@@ -807,14 +796,4 @@ a:hover {
     .mensaje p {
         font-size: 1rem;
     }
-}
-
-
-
-img {
-    max-width: 100%;
-    height: auto;
-}
-.author-link {
-    font-weight: bold;
 }
