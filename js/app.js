@@ -1,9 +1,76 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("DOMContentLoaded triggered."); // Esto debería aparecer en la consola
+    console.log("DOMContentLoaded triggered."); // Esto aparecerá en la consola
     const main = document.querySelector('main');
+    const header = document.querySelector('header');
+    const backToTopButton = document.getElementById('backToTop');
     
-    // Simplificar manejo del scroll
+    // Configuración inicial de overscroll
     document.body.style.overscrollBehavior = 'none';
+    setTimeout(() => {
+        document.body.style.overscrollBehavior = 'auto';
+    }, 0);
+
+    // Función para el parallax de fondo
+    function parallaxBackground() {
+        const background = document.querySelector('.background-test');
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        background.style.transform = `translateY(${scrollTop * 0.02}px)`;
+    }
+
+    // Función para el botón back-to-top
+    function toggleBackToTop() {
+        const scrolled = window.scrollY;
+        if (scrolled > 300) {
+            backToTopButton.style.display = 'flex';
+            setTimeout(() => {
+                backToTopButton.style.opacity = '1';
+            }, 10);
+        } else {
+            backToTopButton.style.opacity = '0';
+            setTimeout(() => {
+                backToTopButton.style.display = 'none';
+            }, 300);
+        }
+    }
+
+    // Función unificada para eventos de scroll
+    function handleScroll() {
+        const currentScroll = window.scrollY;
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        
+        // Prevenir scroll más allá del límite
+        if (currentScroll >= maxScroll) {
+            window.scrollTo({
+                top: maxScroll,
+                behavior: 'auto'
+            });
+        }
+        
+        // Actualizar header (añade o quita la clase 'scrolled')
+        if (currentScroll > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+        
+        // Actualiza el parallax y el botón back-to-top
+        parallaxBackground();
+        toggleBackToTop();
+    }
+
+    // Asignar el listener de scroll una sola vez
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Implementación del botón back-to-top
+    backToTopButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // Simplificar manejo del scroll
     let lastScrollTop = 0;
     
     document.addEventListener('scroll', () => {
@@ -20,9 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         lastScrollTop = currentScroll;
     }, { passive: true });
-
-    // Desactivar el comportamiento de rebote en móviles
-    document.body.style.overscrollBehavior = 'auto';
 
     // Ajusta la cantidad de elementos animados según el tamaño de pantalla
     const isMobile = window.innerWidth <= 768;
@@ -234,19 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
       { scale: 1.1, duration: 1, yoyo: true, repeat: -1, ease: "power1.inOut" }
     );
 
-    // Función para el efecto parallax en el fondo
-    function parallaxBackground() {
-        const background = document.querySelector('.background-test');
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        // Mueve el fondo a la mitad de la velocidad del scroll
-        background.style.transform = `translateY(${scrollTop * 0.02}px)`;
-    }
-
-    // Asocia el evento scroll para actualizar el parallax
-    window.addEventListener('scroll', parallaxBackground);
-
     gsap.registerPlugin(ScrollTrigger);
-
 
     gsap.from(".mensaje p", {
         duration: 1,
@@ -288,37 +340,6 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCounter(); // Llamada inicial
     setInterval(updateCounter, 1000); // Actualiza cada segundo
 
-    // Implementación simplificada del botón back-to-top
-    const backToTopButton = document.getElementById('backToTop');
-    
-    function toggleBackToTop() {
-        const scrolled = window.scrollY;
-        
-        if (scrolled > 300) {
-            requestAnimationFrame(() => {
-                backToTopButton.style.display = 'flex';
-                setTimeout(() => {
-                    backToTopButton.style.opacity = '1';
-                }, 10);
-            });
-        } else {
-            backToTopButton.style.opacity = '0';
-            setTimeout(() => {
-                backToTopButton.style.display = 'none';
-            }, 300);
-        }
-    }
-
-    window.addEventListener('scroll', toggleBackToTop, { passive: true });
-
-    backToTopButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-
     // Corregir el preloader
     window.addEventListener('load', () => {
         const preloader = document.getElementById('preloader');
@@ -331,25 +352,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 500);
         }
     });
-
-    const preloader = document.getElementById('preloader');
-    preloader.style.opacity = '0';
-    setTimeout(() => {
-        preloader.style.display = 'none';
-    }, 500); // Ajusta el tiempo según tu animación
-
 });
-
-// Asegúrate de que el listener de scroll esté correctamente declarado
-window.addEventListener('scroll', () => {
-    const header = document.querySelector('header');
-    if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-    } else {
-        header.classList.remove('scrolled');
-    }
-});
-
 
 // Añade detección de orientación
 window.addEventListener('orientationchange', () => {
