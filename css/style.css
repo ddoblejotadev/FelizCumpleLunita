@@ -632,7 +632,6 @@ a:hover {
     align-items: center;
     justify-content: center;
     z-index: 10000;
-    transition: opacity 1s ease;
 }
 
 /* Spinner animado */

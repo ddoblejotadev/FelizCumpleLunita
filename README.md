@@ -12,16 +12,10 @@ El proyecto contiene los siguientes archivos:
   
 - **js/app.js**: Código JavaScript que se encarga de las animaciones y la interactividad.
 
-- **service-worker.js**: Service Worker para funcionalidad offline.
-
-- **manifest.json**: Archivo de configuración para PWA.
-
 ## Características
 
 - Animaciones suaves
 - Diseño responsive
-- Soporte offline
-- Instalable como PWA
 
 ## Instrucciones para Configurar y Ejecutar el Proyecto
 

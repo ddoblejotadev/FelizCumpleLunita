@@ -136,9 +136,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const sunflowerInterval = isMobile ? 4000 : 3000;
     const balloonInterval = isMobile ? 5000 : 4000;
 
-    setInterval(createHeart, heartInterval);       // Crear un corazón cada 500ms
-    setInterval(createSunflower, sunflowerInterval);    // Crear un girasol cada 3000ms
-    setInterval(createBalloon, balloonInterval);  // Crea un globo cada 4 segundos
+    // Guardar referencias a los intervalos
+    const intervals = {
+        heart: setInterval(createHeart, heartInterval),
+        sunflower: setInterval(createSunflower, sunflowerInterval),
+        balloon: setInterval(createBalloon, balloonInterval)
+    };
+
+    // Limpiar intervalos cuando el usuario cambia de pestaña
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            Object.values(intervals).forEach(clearInterval);
+        } else {
+            intervals.heart = setInterval(createHeart, heartInterval);
+            intervals.sunflower = setInterval(createSunflower, sunflowerInterval);
+            intervals.balloon = setInterval(createBalloon, balloonInterval);
+        }
+    });
 
     // Nueva implementación alternativa para el botón de celebración
     const btn = document.querySelector('.icon-btn');
@@ -317,6 +331,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 500);
         }
     });
+
+    const preloader = document.getElementById('preloader');
+    preloader.style.opacity = '0';
+    setTimeout(() => {
+        preloader.style.display = 'none';
+    }, 500); // Ajusta el tiempo según tu animación
 
 });
 
