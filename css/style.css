@@ -1,21 +1,37 @@
-/* Importar fuente desde Google Fonts para una tipografía más estilizada */
+/* Importar fuentes se recomienda hacerlas mediante <link> en HTML,
+   pero si decides mantener @import, evalúa su impacto en el rendimiento */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
 :root {
     --primary-color: #FFC0CB;  /* Rosa claro */
     --secondary-color: #FFB6C1;  /* Rosa pálido */
-    --accent-color: #FF69B4;  /* Rosa fuerte */
+    --accent-color: #FF69B4;     /* Rosa fuerte */
     --text-color: #333333;
     --background-gradient: linear-gradient(180deg, var(--secondary-color), var(--primary-color));
 }
 
+/* Consolidar propiedades globales */
 html, body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    overscroll-behavior: none;
     scroll-behavior: smooth;
+    overscroll-behavior: none;
+}
+
+body {
+    font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+    background: var(--background-gradient); /* Aplica gradiente de fondo */
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background 0.5s ease;
+    -webkit-overflow-scrolling: touch;
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 60px; /* Espacio para el footer */
 }
 
 html {
@@ -24,24 +40,13 @@ html {
 }
 
 body {
-    font-family: 'Roboto', system-ui, -apple-system, sans-serif; /* Se actualiza la tipografía */
     background-color: #f9f9f9;
     margin: 0;
     padding: 0;
     /* Permite scroll vertical si el contenido crece */
     overflow-x: hidden;
     overflow-y: auto;
-    background: var(--background-gradient);
-    color: var(--text-color);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: background 0.5s ease; /* Transición suave para cambios de fondo */
     overscroll-behavior: none;
-    -webkit-overflow-scrolling: touch;
-    min-height: 100vh;
-    position: relative;
-    padding-bottom: 60px; /* Espacio para el footer */
 }
 
 header {
